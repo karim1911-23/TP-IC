@@ -1,0 +1,42 @@
+@prefix ex: <http://example.org/university#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+ex:Professor a owl:Class ;
+    rdfs:subClassOf ex:ProfessorTeachesCourse,
+        ex:Teacher ;
+    owl:disjointWith ex:Assistant .
+
+ex:hasHomework a owl:ObjectProperty ;
+    rdfs:domain ex:Course ;
+    rdfs:range ex:Homework .
+
+ex:organizedBy a owl:ObjectProperty ;
+    rdfs:domain ex:Course ;
+    rdfs:range ex:Teacher .
+
+ex:Assistant a owl:Class ;
+    rdfs:subClassOf ex:AssistantTeachesLabCourse,
+        ex:Teacher .
+
+ex:AssistantTeachesLabCourse a owl:Restriction ;
+    owl:allValuesFrom ex:LaboratoryCourse ;
+    owl:onProperty ex:teaches .
+
+ex:Homework a owl:Class .
+
+ex:LaboratoryCourse a owl:Class ;
+    rdfs:subClassOf ex:Course .
+
+ex:ProfessorTeachesCourse a owl:Restriction ;
+    owl:allValuesFrom ex:Course ;
+    owl:onProperty ex:teaches .
+
+ex:teaches a owl:ObjectProperty ;
+    rdfs:domain ex:Teacher ;
+    rdfs:range ex:Course .
+
+ex:Teacher a owl:Class .
+
+ex:Course a owl:Class .
+
